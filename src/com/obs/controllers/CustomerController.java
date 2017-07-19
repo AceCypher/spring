@@ -118,6 +118,14 @@ public class CustomerController {
 		attrs.addFlashAttribute("status", service.deleteCustomer(custId));
 		return "redirect:/cust/list";
 	}
+	// req handling method to delete customer details
+	@GetMapping(value = "/temp/{custId}")
+	public String processTempForm(@PathVariable int custId, RedirectAttributes attrs) {
+	
+		System.out.println("in template customer  " + custId);
+		//attrs.addFlashAttribute("status", service.deleteCustomer(custId));
+		return "/cust/template";
+	}
 
 	// global mapping for /cust/ --convenience method to handle globally all
 	// forwards

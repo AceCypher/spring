@@ -3,13 +3,13 @@ package com.obs.pojos;
 import java.util.Date;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name="customers")
@@ -17,35 +17,44 @@ public class Customer {
 
 	private Integer id;
 
+	@Column(name="user_name")
 	@NotEmpty(message="Name must not be blank")
 	private String name;
 
+	@Column(name="user_email")
 	@NotEmpty(message="Email must not be blank")
 	@Email(message="Invalid Email")
 	private String email;
 
+	@Column(name="user_password")
 	@NotEmpty(message="Password must be supplied")
 	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message="Blank or Invalid Password")
 	private String password;
-
+	
+	private boolean enabled;
+	
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_created", nullable = false)
-    private Date created;
+	@Column(name="reg_date")
+	private Date regDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_updated", nullable = false)
-    private Date updated;
+//	@CreationTimestamp
+//	@Temporal(TemporalType.DATE)
+//	@Column(name = "create_date", nullable=false)
+//	private Date createDate;// = new Date();
+//	
+//	@UpdateTimestamp
+//	@Temporal(TemporalType.DATE)
+//	@Column(name = "modify_date", nullable=false)
+//	private Date modifyDate;// = new Date();
 
-    @PrePersist
-    protected void onCreate() {
-    updated = created = new Date();
+	public boolean isEnabled() {
+        return enabled;
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-    updated = new Date();
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
-
+	
 	public Customer() {
 		System.out.println("in cust constr");
 	}
@@ -56,6 +65,7 @@ public class Customer {
 		this.email = email;
 		this.password = password;
 	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getId() {
@@ -64,6 +74,7 @@ public class Customer {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	@Column(length=20)
 	public String getName() {
 		return name;
@@ -78,6 +89,8 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+
 	@Column(length=20)
 	public String getPassword() {
 		return password;
@@ -88,7 +101,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email
-				+ ", password=" + password + "]";
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password +  "]";
 	}
+
 }

@@ -23,6 +23,7 @@
 						pattern="dd-MM-yyyy" /></td> --%>
 						<td><a href="<spring:url value='update?id=${cust.id}'/>">Update Customer</a></td>
 						<td><a href="<spring:url value='delete/${cust.id}'/>">Un-subscribe Customer</a></td>
+						<td><a href="<spring:url value='temp/${cust.id}'/>">Template Access</a></td>
 			</tr>
 		</c:forEach>
 	</table>

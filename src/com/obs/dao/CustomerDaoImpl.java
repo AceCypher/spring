@@ -20,7 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		return c;
 	}
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> listCustomers() {
 
