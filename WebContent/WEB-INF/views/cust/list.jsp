@@ -19,8 +19,8 @@
 			<tr>
 			<td>${cust.name}</td>
 				<td>${cust.email}</td>
-				<td><fmt:formatDate value="${cust.regDate}"
-						pattern="dd-MM-yyyy" /></td>
+				<%-- <td><fmt:formatDate value="${cust.regDate}"
+						pattern="dd-MM-yyyy" /></td> --%>
 						<td><a href="<spring:url value='update?id=${cust.id}'/>">Update Customer</a></td>
 						<td><a href="<spring:url value='delete/${cust.id}'/>">Un-subscribe Customer</a></td>
 			</tr>

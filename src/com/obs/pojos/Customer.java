@@ -14,38 +14,47 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="customers")
 public class Customer {
-	
+
 	private Integer id;
-	
+
 	@NotEmpty(message="Name must not be blank")
 	private String name;
-	
+
 	@NotEmpty(message="Email must not be blank")
 	@Email(message="Invalid Email")
 	private String email;
 
-	//	@NotEmpty(message="Password must be supplied")
+	@NotEmpty(message="Password must be supplied")
 	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message="Blank or Invalid Password")
 	private String password;
-	
-	@NotNull(message="Date must not be blank")
-	@DateTimeFormat(pattern="dd-MM-yyyy")
-	private Date regDate;
-	
-	@NotNull(message="Amount must not be blank")
-	@Range(min=500,max=5000,message="Invalid Reg Amount")
-	private double regAmount;
-	
+
+	@Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_created", nullable = false)
+    private Date created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_updated", nullable = false)
+    private Date updated;
+
+    @PrePersist
+    protected void onCreate() {
+    updated = created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+    updated = new Date();
+    }
+
 	public Customer() {
 		System.out.println("in cust constr");
 	}
-	
-	public Customer(String name, String email, String password, Date regDate) {
+
+	public Customer(String name, String email, String password) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.regDate = regDate;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,28 +85,10 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Temporal(TemporalType.DATE)
-	@Column(name="reg_date")
-	public Date getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-	
-	public double getRegAmount() {
-		return regAmount;
-	}
-	public void setRegAmount(double regAmount) {
-		this.regAmount = regAmount;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", email=" + email
-				+ ", password=" + password + ", regDate=" + regDate + "]";
+				+ ", password=" + password + "]";
 	}
-	
-	
-
 }

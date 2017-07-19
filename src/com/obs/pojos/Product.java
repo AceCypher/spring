@@ -1,103 +1,177 @@
 package com.obs.pojos;
 
 import java.util.Date;
+import javax.validation.constraints.Size;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="products")
 public class Product {
-	
-	private Integer id;
-	
-	@NotEmpty(message="Name must not be blank")
-	private String name;
-	
-	@NotEmpty(message="Email must not be blank")
-	@Email(message="Invalid Email")
-	private String email;
 
-	//	@NotEmpty(message="Password must be supplied")
-	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})",message="Blank or Invalid Password")
-	private String password;
-	
-	@NotNull(message="Date must not be blank")
-	@DateTimeFormat(pattern="dd-MM-yyyy")
-	private Date regDate;
-	
-	@NotNull(message="Amount must not be blank")
-	@Range(min=500,max=5000,message="Invalid Reg Amount")
-	private double regAmount;
-	
-	public Product() {
-		System.out.println("in cust constr");
-	}
-	
-	public Product(String name, String email, String password, Date regDate) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.regDate = regDate;
-	}
+	private Integer id;
+
+
+	@Column(name = "product_name", length = 100)
+	@Size(min = 3, message = "Product Name must be at least 3 characters!")
+	private String productName;
+
+	@Column(name = "product_code", length = 100)
+	@Size(min = 3, message = "Product Code must be at least 3 characters!")
+	private String productCode;
+
+	@Column(name = "product_base_amount", length = 100)
+	@Size(min = 1, message = "Product base amount must be at least 3 characters!")
+	private Long productBaseAmount;
+
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	@Column(name = "product_category_id", length = 100)
+	@Size(min = 1, message = "Product category must be at least 3 characters!")
+	private Category productCategoryId;
+
+	@Column(name = "product_seo_url", length = 100)
+	@Size(min = 3, message = "Product url must be at least 3 characters!")
+	private String productSeoUrl;
+
+	@Column(name = "product_image_url", length = 100)
+	@Size(min = 3, message = "Product image url must be at least 3 characters!")
+	private String productImageUrl;
+
+	@Column(name = "product_desc", length = 100)
+	@Size(min = 5, message = "Product Description must be at least 5 characters!")
+	private String productDesc;
+
+	@Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_created", nullable = false)
+    private Date created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_updated", nullable = false)
+    private Date updated;
+
+    @PrePersist
+    protected void onCreate() {
+    updated = created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+    updated = new Date();
+    }
+	private boolean enabled;
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column(length=20)
-	public String getName() {
-		return name;
+
+	public String getProductName() {
+		return productName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-	@Column(length=20,unique=true)
-	public String getEmail() {
-		return email;
+
+	public String getProductCode() {
+		return productCode;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
-	@Column(length=20)
-	public String getPassword() {
-		return password;
+
+	public Long getProductBaseAmount() {
+		return productBaseAmount;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setProductBaseAmount(Long productBaseAmount) {
+		this.productBaseAmount = productBaseAmount;
 	}
-	@Temporal(TemporalType.DATE)
-	@Column(name="reg_date")
-	public Date getRegDate() {
-		return regDate;
+
+	public Category getProductCategoryId() {
+		return productCategoryId;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+
+	public void setProductCategoryId(Category productCategoryId) {
+		this.productCategoryId = productCategoryId;
 	}
-	
-	public double getRegAmount() {
-		return regAmount;
+
+	public String getProductSeoUrl() {
+		return productSeoUrl;
 	}
-	public void setRegAmount(double regAmount) {
-		this.regAmount = regAmount;
+
+	public void setProductSeoUrl(String productSeoUrl) {
+		this.productSeoUrl = productSeoUrl;
 	}
-	
+
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
+	}
+
+	public String getProductDesc() {
+		return productDesc;
+	}
+
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
+	}
+
+
+	/**
+	 * @param name
+	 * @param productName
+	 * @param productCode
+	 * @param productBaseAmount
+	 * @param productCategoryId
+	 * @param productSeoUrl
+	 * @param productImageUrl
+	 * @param productDesc
+	 * @param created
+	 * @param updated
+	 * @param enabled
+	 */
+
+	public Product(String name, String productName, String productCode, Long productBaseAmount,
+			Category productCategoryId, String productSeoUrl, String productImageUrl, String productDesc) {
+		super();
+		this.productName = productName;
+		this.productCode = productCode;
+		this.productBaseAmount = productBaseAmount;
+		this.productCategoryId = productCategoryId;
+		this.productSeoUrl = productSeoUrl;
+		this.productImageUrl = productImageUrl;
+		this.productDesc = productDesc;
+	}
+
+	public Product() {
+		super();
+		System.out.println("in prod constr");
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email
-				+ ", password=" + password + ", regDate=" + regDate + "]";
+		return "Product [id=" + id + ", productName=" + productName + ", productCode=" + productCode
+				+ ", productBaseAmount=" + productBaseAmount + ", productCategoryId=" + productCategoryId
+				+ ", productSeoUrl=" + productSeoUrl + ", productImageUrl=" + productImageUrl + ", productDesc="
+				+ productDesc + ", created=" + created + ", updated=" + updated + ", enabled=" + enabled + "]";
 	}
-	
-	
+
+
 
 }
