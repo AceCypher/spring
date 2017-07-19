@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Deal-With-It</title>
-<link href="<spring:url value='/css/main.css'/>" type="text/css"
+<link href="<spring:url value='/resources/css/main.css'/>" type="text/css"
     rel="stylesheet">
-<link href="<spring:url value='/css/cust_register.css'/>" type="text/css"
+<link href="<spring:url value='/resources/css/cust_register.css'/>" type="text/css"
     rel="stylesheet">
 
 <link href="<spring:url value='/resources/bootstrap/css/bootstrap.css'/>" type="text/css"
