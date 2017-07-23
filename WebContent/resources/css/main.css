@@ -1,6 +1,8 @@
 @CHARSET "UTF-8";
 
-
+a:active,a:visited{
+	color:white;
+}
 table, th, td {
 	background-color: lime;
 	border: 1px solid black;
@@ -9,5 +11,40 @@ table, th, td {
 }
 .error {
 	color: red;
+}
+
+.headerBgImage{
+	background-color: black;
+	height: 100px;
+}
+
+
+
+.footer{
+	background-color: #414141;
+}
+
+.productGrid{
+	margin-top:100;
+}
+
+.siteName{
+	margin:0px;
+	color: white;
+}
+
+.headerLinks{
+	color:grey;
+	
+}
+
+.gridCell{
+	height: 300px;
+	width: 300px;
+	border: medium;
+	border-style: solid;
+}
+.gridSection{
+	margin: 10px;
 }
 

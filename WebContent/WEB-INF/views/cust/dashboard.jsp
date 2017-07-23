@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<header class="headerBgImage navbar-fixed-top">
+<header class="headerBgImage">
 	<div class="container">
 		<h1 class="siteName"><a  href="bids">DEAL WITH IT!</a></h1>
 		<br>
@@ -27,36 +27,9 @@
 	</div>
 </header>
 <br>
-<!-- MAIN PRODUCTS PAGE GRID BEGINS HERE -->
-		
-<div class="container productGrid">
-		<div class="row" >
-			<section class="col-xs-12 col-sm-6 col-md-3 col-lg-2 gridCell">
-				<div>
-					<a href=#>
-						<img class="icon" src="<spring:url value='/resources/img/placeholder.jpg'/>" alt="placeholder">
-					</a>
-					<br>
-					<b>₹2,087</b>
-					<br>
-					<b>Product Name</b>
-				</div>
-			</section>
-			<section class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-				<div>
-					<a href=#>
-						<img class="icon" src="<spring:url value='/resources/img/placeholder.jpg'/>" alt="placeholder">
-					</a>
-					<br>
-					<b>₹2,087</b>
-					<br>
-					<b>Product Name</b>
-				</div>
-			</section>
-  </div><!-- ROW -->
-</div><!-- GRID -->
-<!-- PRODUCTS GRID END HERE -->
-<br>
+
+
+
 <footer class="footer navbar-fixed-bottom">
 	<a class="headerLinks" href="login">Customer Login </a><br>
 	<a class="headerLinks" href="list">Customer List </a><br>
@@ -64,7 +37,7 @@
 	<a class="headerLinks" href="dashboard">Bids Page </a><br>
 </footer>
 </body>
-<script src="<spring:url value='/resources/js/jquery.1.9.1.min.js'/>"></script>
+<script src="<spring:url value='/resources/js/jquery-2.0.3.js'/>"></script>
 <script src="<spring:url value='/resources/bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<spring:url value='/resources/js/script.js'/>"></script>
 <script src="<spring:url value='/resources/js/jquery.countdownTimer.min.js'/>"></script>

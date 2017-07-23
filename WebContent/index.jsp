@@ -10,6 +10,9 @@
 		
 		<a href="cust/login">Customer Login</a><br/>
 		<a href="cust/list">Customer List</a><br/>
+		<a href="cust/bids">Bids Page</a><br/>
+		
+		
 	
 	
 </body>
